@@ -167,6 +167,19 @@ void APVZ_USFX_LAB02GameMode::BeginPlay()
 		World->GetTimerManager().SetTimer(TimerHandleTarjetasPlantaNuez, this, &APVZ_USFX_LAB02GameMode::TimerCallBackTarjetasPlantaNuez, 15.0f);
 
 	}
+	// Configurar un temporizador para mostrar el número de proyectiles cada 5 segundos
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle_NumeroProyectiles, this, &APVZ_USFX_LAB02GameMode::MostrarNumeroProyectiles, 5.0f, true);
+
+}
+
+
+
+void APVZ_USFX_LAB02GameMode::MostrarNumeroProyectiles()
+{
+	
+		// Mostrar el número total de proyectiles disparados en la consola
+		UE_LOG(LogTemp, Warning, TEXT("Número total de proyectiles disparados: %d"), APlant::TotalProyectilesDisparados);
+	
 
 }
 
@@ -249,8 +262,9 @@ void APVZ_USFX_LAB02GameMode::Tick(float DeltaTime)
 			ArrayZombies.Remove(ZombieToRemove);
 		}
 
-}
 
+
+}
 
 void APVZ_USFX_LAB02GameMode::VisualizarPotenciadores() {
 	for (TPair<FString, uint32> ElementoActual : MapPotenciadores)

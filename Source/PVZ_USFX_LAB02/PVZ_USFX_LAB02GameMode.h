@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "Plant.h" 
 #include "PVZ_USFX_LAB02GameMode.generated.h"
-
 class APotenciador;
 
 UCLASS(MinimalAPI)
@@ -27,6 +27,10 @@ public:
 	int32 NumberZombiesCono = 5;
 	int32 NumberZombiesCubo = 2;
 	int32 NumberZombiesSenal = 3;
+
+	//mostrar mensaje
+
+	void MostrarNumeroProyectiles();
 
 	TMap<FName, int32> mOrdaZombies;
 	int32 NumberZombiesSpawned = 0;
@@ -59,6 +63,7 @@ protected:
 
 	FTimerHandle TimerHandleTarjetasPlantaNuez;
 	FTimerHandle TimerHandlePotenciadoresAgua;
+	FTimerHandle TimerHandle_NumeroProyectiles;
 	float IncrementarAguaCada = 20.0f;
 
 	void TimerCallBackPotenciadoresAgua();

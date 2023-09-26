@@ -6,6 +6,10 @@
 #include "Zombie.h"
 
 // Sets default values
+
+//
+int32 APlant::TotalProyectilesDisparados = 0;
+
 APlant::APlant()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -30,6 +34,11 @@ APlant::APlant()
 	TiempoTranscurrido = 0.0f;
 	TiempoEntreDisparos = 0.01f;
 	Tags.Add(TEXT("Plant"));
+
+	if (TotalProyectilesDisparados == 0)
+	{
+		TotalProyectilesDisparados = 0;
+	}
 }
 
 //void APlant::OnOverlapBegin(AActor* OverlappedActor, AActor* OtherActor)
@@ -54,7 +63,9 @@ APlant::APlant()
 void APlant::BeginPlay()
 {
 	Super::BeginPlay();
+
 }
+
 
 // Called every frame
 void APlant::Tick(float DeltaTime)
@@ -74,36 +85,36 @@ void APlant::Tick(float DeltaTime)
 	}
 	
 	// Configura un temporizador para mostrar el número total de proyectiles disparados cada 5 segundos.
-	if (TiempoTranscurrido >= 5.0f)
+	/*if (TiempoTranscurrido >= 5.0f)
 	{
 		MostrarNumeroProyectiles();
-		TiempoTranscurrido = 0.0f;
+		TiempoTranscurrido = 0.0f;*/
 		/*MostrarNumeroProyectiles();*/
 	//	// Muestra el número total de proyectiles disparados en la consola (puedes personalizar esto según tus necesidades).
 	//	UE_LOG(LogTemp, Warning, TEXT("Número total de proyectiles disparados: %d"), TiempoTranscurrido);
 
-	//	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Número total de proyectiles disparados: %d"), TiempoTranscurrido));
-	}
+	/*	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Número total de proyectiles disparados: %d"), TotalProyectilesDisparados));
+	}*/
 }
 //función para mostrar el número total de proyectiles disparados.
-void APlant::MostrarNumeroProyectiles()
-{
-	// Muestra el número total de proyectiles disparados en la consola (puedes personalizar esto según tus necesidades).
-	UE_LOG(LogTemp, Warning, TEXT("Número total de proyectiles disparados: %d"), TotalProyectilesDisparados);
-
-	// Reinicia el contador de proyectiles.
-	
-
-	//// Construye el mensaje de depuración con el formato deseado.
-	FString Mensaje = FString::Printf(TEXT("Número total de proyectiles disparados: %d"), TotalProyectilesDisparados);
-
-	//// Agrega el mensaje de depuración en la pantalla con color rojo.
-	FColor ColorRojo = FColor::Red;
-	float Duracion = 100.0f; // Duración del mensaje en pantalla (en segundos).
-	GEngine->AddOnScreenDebugMessage(-1, Duracion, ColorRojo, Mensaje);
-
-
-}
+//void APlant::MostrarNumeroProyectiles()
+//{
+//	// Muestra el número total de proyectiles disparados en la consola (puedes personalizar esto según tus necesidades).
+//	UE_LOG(LogTemp, Warning, TEXT("Número total de proyectiles disparados: %d"), TotalProyectilesDisparados);
+//
+//	// Reinicia el contador de proyectiles.
+//	
+//
+//	//// Construye el mensaje de depuración con el formato deseado.
+//	FString Mensaje = FString::Printf(TEXT("Número total de proyectiles disparados: %d"), TotalProyectilesDisparados);
+//
+//	//// Agrega el mensaje de depuración en la pantalla con color rojo.
+//	FColor ColorRojo = FColor::Red;
+//	float Duracion = 100.0f; // Duración del mensaje en pantalla (en segundos).
+//	GEngine->AddOnScreenDebugMessage(-1, Duracion, ColorRojo, Mensaje);
+//
+//
+//}
 
 void APlant::FireShot(FVector FireDirection)
 {
@@ -128,7 +139,12 @@ void APlant::FireShot(FVector FireDirection)
 			World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &APlant::ShotTimerExpired, FireRate);
 
 			// Incrementa el número total de proyectiles disparados
+			 // Aumentar el contador de proyectiles disparados
+			 // Aumentar el contador de proyectiles disparados
 			TotalProyectilesDisparados++;
+
+			bCanFire = false;
+			World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &APlant::ShotTimerExpired, FireRate);
 		}
 	}
 }

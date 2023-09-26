@@ -28,7 +28,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	//-------------->funcion para mostrar mensaje<-------------
-	void MostrarNumeroProyectiles();
+	
 
 	void FireShot(FVector FireDirection);
 	//void OnOverlapBegin(AActor* OverlappedActor, AActor* OtherActor);
@@ -42,8 +42,8 @@ public:
 
 	void ShotTimerExpired();
 	//*****variable para realizar un seguimiento del número total de proyectiles disparados por todas las plantas.
-	int32 TotalProyectilesDisparados = 0 ;
-
+	/*int32 TotalProyectilesDisparados = 0  ;*/
+	static int32 TotalProyectilesDisparados;
 	float TiempoTranscurrido;
 	float TiempoEntreDisparos;
 	float TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser);
