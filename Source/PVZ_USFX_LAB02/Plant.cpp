@@ -136,15 +136,14 @@ void APlant::FireShot(FVector FireDirection)
 			}
 
 			bCanFire = false;
-			World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &APlant::ShotTimerExpired, FireRate);
+			
 
 			// Incrementa el número total de proyectiles disparados
 			 // Aumentar el contador de proyectiles disparados
 			 // Aumentar el contador de proyectiles disparados
 			TotalProyectilesDisparados++;
 
-			bCanFire = false;
-			World->GetTimerManager().SetTimer(TimerHandle_ShotTimerExpired, this, &APlant::ShotTimerExpired, FireRate);
+
 		}
 	}
 }
